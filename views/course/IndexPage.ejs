@@ -1,0 +1,167 @@
+<% layout('layouts/boilerplate') -%>
+<div
+  class="bg-img d-flex flex-column"
+  style="
+    min-height: 65vh;
+    background-image: linear-gradient(to bottom, transparent 50%, var(--bs-dark)), url('/images/bg/bg5.png');
+  "
+>
+  <div class="container d-flex flex-column justify-content-center flex-fill">
+    <div class="h3 text-info d-flex align-items-center gap-1 m-0">
+      <% if (filter.type === "project"){%>
+      <i class="h1 ph-duotone ph-download"></i> <span>APPLY</span> <% } else{%>
+      <i class="h1 ph-duotone ph-book-open-text"></i> <span class="mb-1">LEARN</span> <%}%>
+    </div>
+    <div class="col-lg-8">
+      <h1 class="display-4 flex-fill">Self-paced Data Science courses</h1>
+      <p class="fs-4">
+        Build fundamental Data science skills and then practice what you’ve learned with Project-Based courses curated
+        by experts.
+      </p>
+    </div>
+  </div>
+</div>
+<div class="bg-dark sticky-top" style="z-index: 0; height: 59px"></div>
+<div class="bg-secondary py-5">
+  <section class="container pb-5">
+    <div class="row g-3">
+      <div class="col">
+        <div class="d-flex gap-2 flex-wrap">
+          <ul class="nav nav-pills flex-fill">
+            <li class="nav-item">
+              <a
+                class="nav-link px-5 border-end-0 rounded-end-0 <%=filter.type==='course' ? 'active border border-primary':'border border-primary border-opacity-50'%>"
+                href="/free-courses?type=course"
+                >Course</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link px-5 border-start-0 rounded-start-0 <%=filter.type==='project' ? 'active border border-primary':'border border-primary border-opacity-50'%>"
+                href="/free-courses?type=project"
+                >Project</a
+              >
+            </li>
+          </ul>
+          <% if (user && user.isAdmin) {%> <%- include("./CreatePopup") %> <%} %>
+          <button
+            class="btn btn-dark d-lg-none lh-1 px-2"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasIndex"
+            aria-controls="offcanvasIndex"
+          >
+            <i class="ph ph-sliders fs-4"></i>
+          </button>
+        </div>
+
+        <div class="mt-4">
+          <%courses.forEach(course => {%>
+          <a
+            href="/free-courses/<%=course.slug%>"
+            class="d-block text-decoration-none text-black bg-white rounded-3 p-3 mb-3 border border-dark border-opacity-25"
+          >
+            <!-- <i class="display-1 lh-1 ph-thin ph-article"></i> -->
+            <h5><%=course.title%></h5>
+            <p class="text-truncate-2 m-0"><%=course.description%></p>
+            <div class="text-muted m-0 text-capitalize d-flex flex-wrap gap-3 align-items-center">
+              <small
+                ><i class="ph ph-clock align-middle"></i> <%=course.length?.value %> <%= course.length?.unit%></small
+              >
+              <small><i class="ph ph-chart-bar-horizontal align-middle"></i> <%=course.difficulty %></small>
+              <small><i class="ph ph-code align-middle"></i> <%=course.technology?.name%></small>
+              <small><i class="ph ph-tag align-middle"></i> <%=course.topic?.name%></small>
+              <div class="btn btn-sm rounded-pill btn-primary ms-auto">
+                <span class="align-middle"></span> <i class="ph-bold ph-arrow-right align-middle"></i>
+              </div>
+            </div>
+          </a>
+          <%});%>
+        </div>
+        <div class="text-center">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-primary disabled">Previous</button>
+            <button type="button" class="btn btn-primary">1</button>
+            <button type="button" class="btn btn-outline-primary disabled">Next</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto col-lg-4 col-xl-3">
+        <div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasIndex" aria-labelledby="offcanvasIndexLabel">
+          <div class="offcanvas-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#offcanvasIndex"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body flex-column">
+            <!-- <h4 class="d-none d-lg-block text-opacity-75 text-ceter ps-2">Course Index</h4> -->
+            <div class="accordion" id="index-accordion">
+              <aside class="bg-white text-dark rounded-3 border border-dark border-opacity-25">
+                <form action="/free-courses" id="filter-form" onchange="this.submit()">
+                  <input type="hidden" name="type" value="<%=filter.type%>" />
+                  <!-- <h6 class="m-3">Filters</h6> -->
+                  <!-- <hr class="m-0" /> -->
+                  <div class="p-3">
+                    <div class="row g-1">
+                      <h6 class="text-muted fw-light">Difficulty</h6>
+                      <div class="col-6">
+                        <input type="radio" class="btn-check" name="difficulty" id="difficulty-all" value=""
+                        <%=!filter.difficulty? 'checked':''%> />
+                        <label class="btn btn-sm btn-outline-dark rounded-pill w-100" for="difficulty-all">All</label>
+                      </div>
+                      <div class="col-6">
+                        <input type="radio" class="btn-check" name="difficulty" id="difficulty-beginner"
+                        value="beginner" <%=filter.difficulty === 'beginner'? 'checked':''%> />
+                        <label class="btn btn-sm btn-outline-dark rounded-pill w-100" for="difficulty-beginner"
+                          >Beginner</label
+                        >
+                      </div>
+                      <div class="col-6">
+                        <input type="radio" class="btn-check" name="difficulty" id="difficulty-intermediate"
+                        value="intermediate" <%=filter.difficulty === 'intermediate'? 'checked':''%> />
+                        <label class="btn btn-sm btn-outline-dark rounded-pill w-100" for="difficulty-intermediate"
+                          >Intermediate</label
+                        >
+                      </div>
+                      <div class="col-6">
+                        <input type="radio" class="btn-check" name="difficulty" id="difficulty-advanced"
+                        value="advanced" <%=filter.difficulty === 'advanced'? 'checked':''%> />
+                        <label class="btn btn-sm btn-outline-dark rounded-pill w-100" for="difficulty-advanced"
+                          >Advanced</label
+                        >
+                      </div>
+                    </div>
+                    <div class="mt-4">
+                      <h6 class="text-muted fw-light">Technology</h6>
+                      <%technologies.forEach((t,i)=>{%>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="technology" value="<%=t._id%>"
+                        id="technology-<%=i%>" <%=filter.technology.includes(t._id.toString()) ? 'checked':"" %> />
+                        <label class="form-check-label" for="technology-<%=i%>"><%=t.name%></label>
+                      </div>
+                      <%})%>
+                    </div>
+                    <div class="mt-4">
+                      <h6 class="text-muted fw-light">Topic</h6>
+                      <%topics.forEach((t,i)=>{%>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="topic" value="<%=t._id%>"
+                        id="topic-<%=i%>" <%=filter.topic.includes(t._id.toString()) ? 'checked':"" %> />
+                        <label class="form-check-label" for="topic-<%=i%>"><%=t.name%></label>
+                      </div>
+                      <%})%>
+                    </div>
+                  </div>
+                </form>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

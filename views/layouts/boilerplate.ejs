@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=metaTitle%> | Data Buffet</title>
+    <meta name="description" content="<%=metaDescription%>" />
+    <link rel="canonical" href="https://databuffet.io<%=canonical%>" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Bootstrap CSS -->
+    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
+    <!-- icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+
+  <body class="bg-dark text-white d-flex flex-column mvh-100">
+    <%- include('../partials/Navbar'); %>
+    <main class="flex-fill d-flex flex-column"><%- body -%></main>
+    <%- include('../partials/Footer'); %>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="/javascripts/bootstrap.bundle.min.js"></script>
+    <!-- Crisp Chat -->
+    <script type="text/javascript">
+      window.$crisp = [];
+      window.CRISP_WEBSITE_ID = "90a7fa69-2a25-4eb7-a61c-433f0e21ea4f";
+      (function () {
+        d = document;
+        s = d.createElement("script");
+        s.src = "https://client.crisp.chat/l.js";
+        s.async = 1;
+        d.getElementsByTagName("head")[0].appendChild(s);
+      })();
+    </script>
+  </body>
+</html>

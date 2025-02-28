@@ -1,0 +1,44 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+  <i class="ph-bold ph-trash-simple align-middle"></i>
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  data-bs-theme="dark"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content text-start">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-danger-emphasis" id="deleteModalLabel">
+          Do you really want to delete this course?
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <p class="mb-2 text-secondary">Deleting a course will delete all of it's chapters and lessons.</p>
+          <input
+            type="text"
+            name="title"
+            class="form-control"
+            placeholder="Enter the name of the course to continue."
+            onkeyup="document.querySelector('#delete-btn').disabled = this.value.toLowerCase() !== '<%=course.title.toLowerCase()%>'"
+            onchange="document.querySelector('#delete-btn').disabled = this.value.toLowerCase() !== '<%=course.title.toLowerCase()%>'"
+          />
+        </div>
+        <form action="/courses/<%=course._id%>?_method=DELETE" method="post">
+          <div class="text-end mt-3">
+            <button type="submit" class="btn btn-sm btn-outline-danger px-5" id="delete-btn" disabled>Delete</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

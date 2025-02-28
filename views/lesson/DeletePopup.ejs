@@ -1,0 +1,36 @@
+<div
+  class="modal fade"
+  data-bs-theme="dark"
+  id="deleteLessonModal"
+  tabindex="-1"
+  aria-labelledby="deleteLessonModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content text-start">
+      <div class="d-flex p-3 pb-0 justify-content-between">
+        <h1 class="modal-title fs-5 text-danger-emphasis" id="deleteLessonModalLabel">
+          Do you really want to delete this lesson?
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="post">
+          <div class="text-end mt-3">
+            <button type="submit" class="btn btn-sm btn-outline-danger px-5">Delete</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const deleteLessonModal = document.getElementById("deleteLessonModal");
+  deleteLessonModal.addEventListener("show.bs.modal", (event) => {
+    const button = event.relatedTarget;
+    const id = button.getAttribute("data-bs-id");
+    deleteLessonModal.querySelector("form").action = `/lessons/${id}?_method=DELETE`;
+  });
+</script>

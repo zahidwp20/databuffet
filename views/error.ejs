@@ -1,0 +1,9 @@
+<% layout('layouts/boilerplate') -%>
+<div class="py-5 text-center">
+  <div class="container py-5 my-5">
+    <h1 class="text-danger text-opacity-75">Error: <%= message %></h1>
+    <h2><%= error.status %></h2>
+    <pre class="text-start"><%= error.stack %></pre>
+    <a href=".." class="btn btn-light px-5">Go Back</a>
+  </div>
+</div>

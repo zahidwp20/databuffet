@@ -1,0 +1,147 @@
+<% layout('layouts/boilerplate') -%> <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+<div class="bg-dark sticky-top" style="z-index: 0; height: 58px"></div>
+
+<div class="py-5 bg-white text-black">
+  <section class="container-xxl">
+    <div class="row">
+      <div class="col-4 col-xl-3">
+        <div
+          class="offcanvas-lg offcanvas-start"
+          tabindex="-1"
+          id="offcanvasIndex"
+          aria-labelledby="offcanvasIndexLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasIndexLabel">Course Index</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#offcanvasIndex"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="offcanvas-body flex-column">
+            <!-- <h4 class="d-none d-lg-block text-opacity-75 text-ceter ps-2">Course Index</h4> -->
+            <div class="accordion" id="index-accordion">
+              <% chapters.forEach(chapter => {%>
+              <div class="accordion-item bg-white shadow-sm border border-dark border-opacity-25">
+                <h6 class="accordion-header">
+                  <button
+                    class="accordion-button shadow-none bg-transparent <%=chapter._id.equals(lesson.chapter._id)? 'current':'collapsed'%>"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse<%=chapter._id%>"
+                    aria-expanded="<%=chapter._id.equals(lesson.chapter._id)? 'true':'false'%>"
+                    aria-controls="collapse<%=chapter._id%>"
+                  >
+                    <%=chapter.title%>
+                  </button>
+                </h6>
+                <div
+                  id="collapse<%=chapter._id%>"
+                  class="accordion-collapse collapse <%=chapter._id.equals(lesson.chapter._id)? 'show':''%>"
+                  data-bs-parent="#index-accordion"
+                >
+                  <div class="accordion-body p-0">
+                    <hr class="mt-0" />
+                    <ul class="nav flex-column pb-3">
+                      <% chapter.lessons?.forEach(l => {%>
+                      <li class="nav-item">
+                        <a
+                          id="lesson_<%=l._id%>"
+                          class="nav-link nav-link-dark d-flex align-items-center border-0 <%=l._id.equals(lesson._id)? 'active':''%>"
+                          href="/lessons/<%=l.slug%>"
+                        >
+                          <i class="ph ph-check-circle align-middle fs-4 me-2 lesson-check"></i>
+                          <%=l.title%>
+                        </a>
+                      </li>
+                      <%}) %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <%}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-8 col-xl-9">
+        <div class="d-flex gap-2 align-items-end">
+          <button
+            class="btn btn-primary d-lg-none lh-1 px-2"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasIndex"
+            aria-controls="offcanvasIndex"
+          >
+            <i class="ph-light ph-list-numbers fs-4"></i>
+          </button>
+          <div>
+            <h1 class="h2 fw-light m-0 display-6 fw-semibold"><%=lesson.title%></h1>
+          </div>
+          <!-- <button class="btn btn-outline-secondary border-0 lh-1 px-2 ms-auto" id="theme-btn">
+            <i class="ph-fill ph-sun fs-4"></i>
+          </button> -->
+        </div>
+        <hr />
+        <div class="lesson-container mt-3">
+          <!-- Create the editor container -->
+          <div id="editor"></div>
+        </div>
+        <hr />
+        <div class="d-flex gap-2 align-items-center mt-3 mb-5">
+          <%if(prevLesson){%>
+          <a href="/lessons/<%=prevLesson.slug%>" class="fs-5 btn px-4 btn-outline-dark border-0 text-start">
+            <small class="text-opacity-75"><- Previous Lesson</small>
+            <br />
+            <span class="fw-bold"> <%= prevLesson.title %> </span>
+          </a>
+          <%}%> <%if(nextLesson){%>
+          <a href="/lessons/<%=nextLesson.slug%>" class="fs-5 btn px-4 btn-primary text-end text-white ms-auto">
+            <small class="text-white text-opacity-75">Next Lesson -></small>
+            <br />
+            <span class="fw-bold"> <%= nextLesson.title %> </span>
+          </a>
+          <%}%>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  const currentCourseId = "<%-lesson.course._id%>";
+  const currentLessonId = "<%-lesson._id%>";
+  const quill = new Quill("#editor", { readOnly: true });
+  quill.setContents(<%-lesson.body %>)
+
+  // const lessonContainer = document.querySelector(".lesson-container");
+  // const themeBtn = document.querySelector("#theme-btn");
+  // let lightTheme = localStorage.getItem("lightTheme") == "true";
+
+  // themeBtn.addEventListener("click", function (e) {
+  //   lightTheme = !lightTheme;
+  //   localStorage.setItem("lightTheme", lightTheme);
+  //   changeTheme(lightTheme);
+  // });
+
+  // function changeTheme(light) {
+  //   if (light) {
+  //     lessonContainer.classList.add("light");
+  //     themeBtn.innerHTML = '<i class="ph-fill ph-moon fs-4"></i>';
+  //   } else {
+  //     lessonContainer.classList.remove("light");
+  //     themeBtn.innerHTML = '<i class="ph-fill ph-sun fs-4"></i>';
+  //   }
+  // }
+
+  // changeTheme(lightTheme);
+</script>
+
+<script src="/javascripts/history.js"></script>

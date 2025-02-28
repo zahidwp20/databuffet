@@ -1,0 +1,37 @@
+<div
+  class="modal fade"
+  data-bs-theme="dark"
+  id="deleteChapterModal"
+  tabindex="-1"
+  aria-labelledby="deleteChapterModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content text-start">
+      <div class="d-flex p-3 pb-0 justify-content-between">
+        <h1 class="modal-title fs-5 text-danger-emphasis" id="deleteChapterModalLabel">
+          Do you really want to delete this chapter?
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-2">Deleting a chapter will delete all of it's lessons.</p>
+        <form action="" method="post">
+          <div class="text-end mt-3">
+            <button type="submit" class="btn btn-sm btn-outline-danger px-5">Delete</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const deleteChapterModal = document.getElementById("deleteChapterModal");
+  deleteChapterModal.addEventListener("show.bs.modal", (event) => {
+    const button = event.relatedTarget;
+    const id = button.getAttribute("data-bs-id");
+    deleteChapterModal.querySelector("form").action = `/chapters/${id}?_method=DELETE`;
+  });
+</script>

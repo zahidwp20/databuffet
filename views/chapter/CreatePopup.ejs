@@ -1,0 +1,39 @@
+<button
+  type="button"
+  class="btn btn-sm btn-success ms-auto"
+  data-bs-toggle="modal"
+  data-bs-target="#createChapterModal"
+>
+  Add New Chapter
+</button>
+
+<div
+  class="modal fade"
+  data-bs-theme="dark"
+  id="createChapterModal"
+  tabindex="-1"
+  aria-labelledby="createChapterModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content text-start text-white">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createChapterModalLabel">Add New Chapter</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/chapters" method="post">
+          <input type="hidden" name="course" value="<%=course._id%>" />
+          <div>
+            <label for="title-input-chapter">Title</label>
+            <input type="text" name="title" id="title-input-chapter" class="form-control" required />
+          </div>
+          <div class="text-end mt-3">
+            <button type="button" class="btn btn-sm btn-outline-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-sm btn-primary px-5">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

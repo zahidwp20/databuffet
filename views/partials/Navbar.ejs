@@ -1,0 +1,208 @@
+<header class="position-fixed w-100" style="z-index: 1">
+  <nav class="navbar navbar-expand-lg navbar-dark glass border-top-0 border-start-0 border-end-0 w-100">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <span class="fw-900 text-info">DB</span>
+        DataBuffet
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          class="bg-dark position-absolute start-0 top-0 w-100 h-100 d-lg-none"
+          style="z-index: -1; opacity: 0.8"
+        ></div>
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              data-bs-auto-close="outside"
+            >
+              Courses
+            </a>
+            <ul class="dropdown-menu pe-lg-2 border-0 shadow" style="background-color: #f2f1ef">
+              <li>
+                <h6 class="dropdown-header">Learn</h6>
+              </li>
+              <li class="nested-menu">
+                <button class="dropdown-item d-flex align-items-center">
+                  <span class="mx-2">Beginner Courses</span>
+                  <i class="ph ph-caret-right ms-auto"></i>
+                </button>
+                <ul class="list-unstyled menu rounded">
+                  <li class="d-flex justify-content-between align-items-center">
+                    <h6 class="dropdown-header">Beginner Courses</h6>
+                    <a
+                      class="small me-3 link-dark ms-auto text-nowrap text-end link-underline-opacity-0 link-underline-opacity-100-hover"
+                      href="/free-courses?type=course&difficulty=beginner"
+                      >Show All <i class="ph ph-arrow-right"></i
+                    ></a>
+                  </li>
+                  <%menuData.beginner && menuData.beginner.forEach(c=>{%>
+                  <li><a class="dropdown-item" href="/free-courses/<%= c.slug %>"><%=c.title%></a></li>
+                  <%})%>
+                </ul>
+              </li>
+              <li class="nested-menu">
+                <button class="dropdown-item d-flex align-items-center">
+                  <span class="mx-2">Intermediate Courses</span>
+                  <i class="ph ph-caret-right ms-auto"></i>
+                </button>
+                <ul class="list-unstyled menu rounded">
+                  <li class="d-flex justify-content-between align-items-center">
+                    <h6 class="dropdown-header">Intermediate Courses</h6>
+                    <a
+                      class="small me-3 link-dark ms-auto text-nowrap text-end link-underline-opacity-0 link-underline-opacity-100-hover"
+                      href="/free-courses?type=course&difficulty=intermediate"
+                      >Show All <i class="ph ph-arrow-right"></i
+                    ></a>
+                  </li>
+                  <%menuData.intermediate && menuData.intermediate.forEach(c=>{%>
+                  <li><a class="dropdown-item" href="/free-courses/<%= c.slug %>"><%=c.title%></a></li>
+                  <%})%>
+                </ul>
+              </li>
+              <li class="nested-menu">
+                <button class="dropdown-item d-flex align-items-center">
+                  <span class="mx-2">Advanced Courses</span>
+                  <i class="ph ph-caret-right ms-auto"></i>
+                </button>
+                <ul class="list-unstyled menu rounded">
+                  <li class="d-flex justify-content-between align-items-center">
+                    <h6 class="dropdown-header">Advanced Courses</h6>
+                    <a
+                      class="small me-3 link-dark ms-auto text-nowrap text-end link-underline-opacity-0 link-underline-opacity-100-hover"
+                      href="/free-courses?type=course&difficulty=advanced"
+                      >Show All <i class="ph ph-arrow-right"></i
+                    ></a>
+                  </li>
+                  <%menuData.advanced && menuData.advanced.forEach(c=>{%>
+                  <li><a class="dropdown-item" href="/free-courses/<%= c.slug %>"><%=c.title%></a></li>
+                  <%})%>
+                </ul>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+
+              <li>
+                <h6 class="dropdown-header">Apply</h6>
+              </li>
+              <li class="nested-menu">
+                <button class="dropdown-item d-flex align-items-center">
+                  <!-- <i class="ph-fill ph-dot text-info" style="margin: 0 -3px !important"></i> -->
+                  <span class="me-2">Real-world projects</span>
+                  <i class="ph ph-caret-right ms-auto"></i>
+                </button>
+                <ul class="list-unstyled menu rounded">
+                  <li class="d-flex justify-content-between align-items-center">
+                    <h6 class="dropdown-header">Real-world projects</h6>
+                    <a
+                      class="small me-3 link-dark ms-auto text-nowrap text-end link-underline-opacity-0 link-underline-opacity-100-hover"
+                      href="/free-courses?type=project"
+                      >Show All <i class="ph ph-arrow-right"></i
+                    ></a>
+                  </li>
+                  <%menuData.projects && menuData.projects.forEach(c=>{%>
+                  <li><a class="dropdown-item" href="/free-courses/<%= c.slug %>"><%=c.title%></a></li>
+                  <%})%>
+                </ul>
+              </li>
+
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <div class="p-3">
+                  <h5>Popular course topics</h5>
+                  <p>Explore free courses in topics that interest you.</p>
+                  <a href="/free-courses?type=course" class="btn btn-primary mt-5">Explore all courses</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Resources
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Blog</a></li>
+              <li><a class="dropdown-item" href="#">Cheat-sheet</a></li>
+              <li><a class="dropdown-item" href="#">Interview prep</a></li>
+              <li><a class="dropdown-item" href="#">Projects</a></li>
+              <li><a class="dropdown-item" href="#">Code along</a></li>
+            </ul>
+          </li> -->
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Community
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Discord</a></li>
+              <li><a class="dropdown-item" href="#">Learner Stories</a></li>
+            </ul>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="/career-center">Career Center</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Career Center
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Upcoming batches</a></li>
+              <li><a class="dropdown-item" href="#">Online training</a></li>
+            </ul>
+          </li> -->
+          <%if(user && user.isAdmin){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/newsletters">Newsletters</a>
+          </li>
+          <% } %>
+        </ul>
+        <%if(user){%>
+        <form action="/auth/logout" method="post">
+          <button type="submit" class="btn btn-sm btn-info px-4 fw-semibold">Logout</button>
+        </form>
+        <% } else { %>
+        <div class="px-5 ms-5"></div>
+        <!-- <a href="/auth/login" class="btn btn-sm btn-info px-4 fw-semibold">Get Started</a> -->
+        <% } %>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <%if(error){%>
+    <div class="alert alert-danger alert-dismissible fade show mt-3 shadow-lg" role="alert">
+      <%=error%>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <%} %> <%if(success){%>
+    <div class="alert alert-success alert-dismissible fade show mt-3 shadow-lg" role="alert">
+      <%=success%>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <%} %>
+  </div>
+</header>
+
+<script>
+  document.querySelectorAll(".nested-menu").forEach((m) =>
+    m.addEventListener("mouseenter", function toggleCourseMenu(t) {
+      document.querySelectorAll(".nested-menu").forEach((m) => m.classList.remove("active"));
+      t.target.classList.add("active");
+    })
+  );
+</script>

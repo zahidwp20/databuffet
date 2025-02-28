@@ -1,0 +1,144 @@
+<% layout('layouts/boilerplate') -%>
+<div class="bg-dark sticky-top" style="z-index: 0; height: 58px"></div>
+<div class="py-5 bg-secondary text-black">
+  <section class="container">
+    <div class="d-flex gap-2 align-items-center">
+      <h1 class="flex-fill fw-semibold m-0"><%=course.title%></h1>
+      <% if (user && user.isAdmin) {%> <%- include("./DeletePopup") %> <%- include("./EditPopup") %> <%} %>
+    </div>
+    <p class="mt-2 mb-1"><%=course.description%></p>
+    <%if(course.link && course.link.url){%>
+    <a href="<%=course.link.url%>" target="_blank" class="btn btn-primary px-4"
+      ><%=course.link.title%> <i class="ph ph-arrow-square-out"></i
+    ></a>
+    <%}%>
+  </section>
+
+  <%if(course.type === "course"){%>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-6 col-lg-4 col-xl-3 d-none d-md-block">
+        <aside class="bg-white rounded-3 border border-dark border-opacity-25">
+          <div class="d-flex gap-2 p-3">
+            <h6 class="m-0">Page Index</h6>
+            <% if (user && user.isAdmin) {%> <%- include("../chapter/CreatePopup") %><%} %>
+          </div>
+          <hr class="mt-0" />
+          <ul class="nav flex-column pb-3">
+            <% course.chapters?.forEach((chapter,i) => {%>
+
+            <li class="nav-item d-flex align-items-center">
+              <a
+                class="nav-link nav-link-dark flex-fill fw-semibold <%=i===0?'active ':''%>"
+                href="#chapter<%=chapter._id%>"
+                ><%=chapter.title%></a
+              >
+              <% if (user && user.isAdmin) {%>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger p-1"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteChapterModal"
+                data-bs-id="<%=chapter._id%>"
+              >
+                <i class="ph fs-5 ph-trash-simple align-middle"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-warning p-1 mx-2"
+                data-bs-toggle="modal"
+                data-bs-target="#editChapterModal"
+                data-bs-id="<%=chapter._id%>"
+                data-bs-title="<%=chapter.title%>"
+              >
+                <i class="ph-light fs-5 ph-pencil-simple align-middle"></i>
+              </button>
+
+              <%} %>
+            </li>
+            <%}); %>
+          </ul>
+        </aside>
+      </div>
+      <div class="col-12 col-md-6 col-lg-8 col-xl-9">
+        <% course.chapters?.forEach((chapter,i) => {%>
+        <section class="bg-white border border-dark border-opacity-25 rounded-3 mb-3 chapter chapter<%=chapter._id%>">
+          <span id="chapter<%=chapter._id%>" style="position: absolute; transform: translateY(-50vh)"></span>
+          <div class="d-flex gap-2 p-3">
+            <h6 class="m-0 <%=i===0?'text-primary':''%>"><%=chapter.title%></h6>
+            <% if (user && user.isAdmin) {%>
+            <button
+              type="button"
+              class="btn btn-sm btn-success ms-auto"
+              data-bs-toggle="modal"
+              data-bs-target="#createLessonModal"
+              data-bs-id="<%=chapter._id%>"
+            >
+              Add New Lesson
+            </button>
+            <%} %>
+          </div>
+          <hr class="mt-0" />
+          <ul class="nav flex-column pb-3">
+            <% chapter.lessons?.forEach(lesson => {%>
+            <li class="nav-item d-flex align-items-center">
+              <a
+                id="lesson_<%=lesson._id%>"
+                class="nav-link nav-link-dark flex-fill d-flex align-items-center"
+                href="/lessons/<%=lesson.slug%>"
+              >
+                <i class="ph ph-check-circle align-middle fs-4 me-2 lesson-check"></i>
+                <%=lesson.title%>
+                <i class="ph-light ph-caret-right align-middle ms-auto"></i>
+              </a>
+              <% if (user && user.isAdmin) {%>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger p-1"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteLessonModal"
+                data-bs-id="<%=lesson._id%>"
+              >
+                <i class="ph fs-5 ph-trash-simple align-middle"></i>
+              </button>
+              <a href="/lessons/<%=lesson._id%>/edit" class="btn btn-sm btn-outline-warning p-1 mx-2">
+                <i class="ph-light fs-5 ph-pencil-simple align-middle"></i>
+              </a>
+
+              <%} %>
+            </li>
+            <%}) %>
+          </ul>
+        </section>
+        <%}) %>
+      </div>
+    </div>
+  </div>
+  <%}%>
+</div>
+
+<% if (user && user.isAdmin) {%> <%- include("../chapter/DeletePopup") %> <%- include("../chapter/EditPopup") %> <%-
+include("../lesson/CreatePopup") %> <%- include("../lesson/DeletePopup") %> <%} %>
+
+<script>
+  const currentCourseId = "<%-course._id%>";
+  const currentLessonId = null;
+  const links = document.querySelectorAll(".nav-link-dark");
+  const chapterHeadings = document.querySelectorAll(".chapter h6");
+
+  links.forEach((link) => {
+    link.addEventListener("click", function () {
+      links.forEach((link) => {
+        link.classList.remove("active");
+      });
+      this.classList.add("active");
+
+      chapterHeadings.forEach((h) => {
+        h.classList.remove("text-primary");
+      });
+      document.querySelector(`.${this.href.split("#")[1]} h6`).classList.add("text-primary");
+    });
+  });
+</script>
+
+<script src="/javascripts/history.js"></script>

@@ -1,0 +1,120 @@
+<% layout('layouts/boilerplate') -%>
+  <section class="bg-img py-5 d-flex flex-column justify-content-center"
+    style="background-image: url('/images/bg/bg-about-1.png')">
+    <div class="container my-5 py-5">
+      <h1 class="display-6 text-info fw-lighter">ABOUT DATABUFFET</h1>
+      <div class="row g-lg-5">
+        <div class="col-12 col-lg-6">
+          <h1 class="display-5 fw-bold mt-5">Our History</h1>
+          <p class="mt-3 fs-5">
+            In a world increasingly driven by data, we at Databuffet recognized the need for everyone to possess data
+            literacy. Our mission became equipping individuals with the skills to confidently navigate the information
+            age. We envisioned a platform where anyone, regardless of background or experience, could embark on an
+            interactive journey to understand, analyze, and communicate data effectively.
+          </p>
+        </div>
+        <div class="col-12 col-lg-6">
+          <h1 class="display-5 fw-bold mt-5">Our Mission</h1>
+          <p class="mt-3 fs-5">
+            We are committed to helping individuals secure their dream roles in data engineering, AI Engineering, and
+            analytics. Through immersive, hands-on live classes led by experienced data professionals, we deliver
+            essential skills and valuable industry insights. Our goal is to equip learners with the tools, knowledge,
+            and support they need to build a successful career in the data field.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-grid-lg py-5 overflow-hidden position-relative">
+    <img src="/images/graphics/g2.svg" width="50" alt="graphics x"
+      class="opacity-75 position-absolute start-0 bottom-0 m-5" style="z-index: -1" />
+    <img src="/images/graphics/g3.svg" alt="graphics x" style="width: 15vmin"
+      class="opacity-75 position-absolute end-0 top-0 m-5" />
+    <div class="container fs-5 py-5 text-center">
+      <img src="/images/team.png" alt="team logo" style="width: 130px" />
+      <h2 class="text-center">Our Team</h2>
+      <div class="d-flex justify-content-around flex-wrap gap-5 mt-5">
+        <div>
+          <div class="d-inline-block rounded-circle overflow-hidden border border-5 border-primary shadow">
+            <img src="/images/team-placeholder.png" width="150" />
+          </div>
+          <h4 class="mt-3 mb-0">James Johnson</h4>
+          <p class="m-0 fw-light small">
+            Senior Machine Learning <br />
+            Engineer
+          </p>
+        </div>
+        <div>
+          <div class="d-inline-block rounded-circle overflow-hidden border border-5 border-primary shadow">
+            <img src="/images/team-placeholder.png" width="150" />
+          </div>
+          <h4 class="mt-3 mb-0">Latasha Jones</h4>
+          <p class="m-0 fw-light small">Senior Data Scientist</p>
+        </div>
+        <div>
+          <div class="d-inline-block rounded-circle overflow-hidden border border-5 border-primary shadow">
+            <img src="/images/team-placeholder.png" width="150" />
+          </div>
+          <h4 class="mt-3 mb-0">Julian Gomez</h4>
+          <p class="m-0 fw-light small">Senior Data Engineer</p>
+        </div>
+        <div>
+          <div class="d-inline-block rounded-circle overflow-hidden border border-5 border-primary shadow">
+            <img src="/images/team-placeholder.png" width="150" />
+          </div>
+          <h4 class="mt-3 mb-0">Madison Paige</h4>
+          <p class="m-0 fw-light small">Senior Data/BI Analyst</p>
+        </div>
+        <div>
+          <div class="d-inline-block rounded-circle overflow-hidden border border-5 border-primary shadow">
+            <img src="/images/team-placeholder.png" width="150" />
+          </div>
+          <h4 class="mt-3 mb-0">William Smith</h4>
+          <p class="m-0 fw-light small">Senior Data Scientist</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-img py-5" style="background-image: url('/images/bg/bg-about-2.png')">
+    <div class="container py-5">
+      <h2 class="h1 fw-bold position-relative text-center">
+        Get in touch with us
+        <span class="rounded-1 d-block position-absolute start-50 translate-middle-x mt-2" style="
+          height: 0.7rem;
+          width: 25vmax;
+          background: linear-gradient(-270deg, transparent 10%, var(--bs-info) 100%);
+        "></span>
+      </h2>
+      <div class="row g-4 align-items-center justify-content-center justify-content-lg-between mt-5">
+        <div class="col-5 d-flex justify-content-center">
+          <div class="position-relative glow">
+            <img src="/images/graphics/g1.svg" alt="graphics x"
+              class="opacity-75 w-50 position-absolute start-0 top-100 translate-middle" />
+            <div class="glass rounded-4 p-5">
+              <img src="/images/icons/envelope.svg" alt="envelope" style="width: 10vmax; min-width: 150px" />
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-10 col-lg-6 col-xl-5">
+          <form class="mt-5 mt-lg-0">
+            <div class="mb-3">
+              <label for="name-input" class="form-label">Name</label>
+              <input type="text" name="name" id="name-input" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="email-input" class="form-label">Email</label>
+              <input type="email" name="email" id="email-input" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="message-input" class="form-label">Message</label>
+              <textarea name="message" id="message-input" class="form-control"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-gradient w-100 mt-4">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>

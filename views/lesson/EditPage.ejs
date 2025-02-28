@@ -1,0 +1,89 @@
+<% layout('layouts/boilerplate') -%>
+<!-- Include the Quill CSS -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+<link href="https://unpkg.com/quill-image-uploader@1.2.4/dist/quill.imageUploader.min.css" rel="stylesheet" />
+
+<div class="my-5"></div>
+<section class="container">
+  <div class="d-flex gap-2 align-items-center">
+    <a href="/free-courses/<%=lesson.course%>" class="btn btn-light lh-1 px-2"><i class="ph ph-caret-left fs-4"></i></a>
+    <h1 class="h2 fw-light m-0">Edit Lesson</h1>
+  </div>
+  <div class="bg-light bg-opacity-10 rounded-3 p-4 mt-3 mb-5">
+    <form
+      action="/lessons/<%=lesson._id%>?_method=PUT"
+      method="post"
+      onsubmit="document.querySelector('#body-input').value = JSON.stringify(quill.getContents())"
+    >
+      <div class="mb-3">
+        <label for="title-input">Title</label>
+        <input type="text" name="title" id="title-input" class="form-control" value="<%=lesson.title%>" />
+      </div>
+
+      <!-- Create the editor container -->
+      <div id="editor"></div>
+      <input type="hidden" name="body" id="body-input" value="" />
+
+      <div class="text-end mt-3">
+        <a href="/free-courses/<%=lesson.course%>" class="btn btn-outline-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary ms-2 px-5">Save</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="https://unpkg.com/quill-image-uploader@1.2.4/dist/quill.imageUploader.min.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  const icons = Quill.import('ui/icons');
+  icons['code-block'] = '<svg viewbox="0 -2 15 18">\n' + '\t<polyline class="ql-even ql-stroke" points="2.48 2.48 1 3.96 2.48 5.45"/>\n' + '\t<polyline class="ql-even ql-stroke" points="8.41 2.48 9.9 3.96 8.41 5.45"/>\n' + '\t<line class="ql-stroke" x1="6.19" y1="1" x2="4.71" y2="6.93"/>\n' + '\t<polyline class="ql-stroke" points="12.84 3 14 3 14 13 2 13 2 8.43"/>\n' + '</svg>';
+  Quill.register("modules/imageUploader", ImageUploader);
+
+  const quill = new Quill("#editor", {
+    theme: "snow",
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ font: [] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ align: [] }, "blockquote", "link"],
+        [{ color: [] }, { background: [] }],
+        ["code", "code-block", { script: "sub" }, { script: "super" }, "image"],
+        ["clean"],
+      ],
+      imageUploader: {
+        upload: (file) => {
+          return new Promise((resolve, reject) => {
+            const formData = new FormData();
+            formData.append("image", file);
+            formData.append("lessonId", "<%=lesson._id%>");
+            formData.append("chapterId", "<%=lesson.chapter%>");
+            formData.append("courseId", "<%=lesson.course%>");
+
+            fetch(
+              "/lessons/image",
+              {
+                method: "POST",
+                body: formData
+              }
+            )
+              .then((response) =>response.json())
+              .then((result) => {
+                console.log(result);
+                resolve(result.url);
+              })
+              .catch((error) => {
+                reject("Upload failed");
+                console.error("Error:", error);
+              });
+          });
+        }
+      }
+    },
+  });
+  quill.setContents(<%-lesson.body %>)
+</script>

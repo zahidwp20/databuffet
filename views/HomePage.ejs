@@ -1,0 +1,94 @@
+<% layout('layouts/boilerplate') -%>
+  <section class="bg-img pt-5" style="background-image: url('/images/bg/bg-home-1.jpg')">
+    <div class="container my-5 py-lg-5">
+      <div class="row align-items-center justify-content-center g-4">
+        <div class="col-10 col-lg-5 col-xl-6 order-lg-1">
+          <img src="/images/hero.png" alt="python logo" class="img-fluid" />
+        </div>
+
+        <div class="col-12 col-lg-7 col-xl-6 text-center text-lg-start">
+          <h1 class="display-2 fw-900 position-relative">
+            Online learning with Industry Experts
+            <span class="rounded-1 d-block w-50 position-absolute end-0 translate-middle-x mt-2"
+              style="height: 0.7rem; background: linear-gradient(-270deg, transparent 10%, var(--bs-info) 100%)"></span>
+          </h1>
+          <p class="fs-4 fw-light mt-4">
+            You’re taught by seasoned data experts who guide your growth throughout the program via live classes.
+          </p>
+          <p class="fs-4 fw-light mt-4">
+            Our live classes immerse you in hands-on, real-world projects using Python, Databricks, SQL, Power BI, and
+            more—helping you quickly build the in-demand skills employers want.
+          </p>
+
+          <form action="/newsletters" method="post">
+            <h5 class="text-secondary mt-5 fw-light">
+              Get the latest tutorials and updates <br />
+              on free machine learning courses.
+            </h5>
+            <div class="input-group mx-auto mx-lg-0 input-group-lg glass rounded-3 border-0" style="max-width: 500px">
+              <input type="email" class="form-control" placeholder="Enter your email here." name="email"
+                required="true" />
+              <button type="submit" class="btn btn-info" value="Subscribe">Subscribe</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-grid-sm py-5 overflow-hidden position-relative">
+    <img src="/images/graphics/g2.svg" width="50" alt="graphics x"
+      class="opacity-75 position-absolute start-0 bottom-0 m-3" style="z-index: -1" />
+    <div class="container fs-5 py-5">
+      <div class="row g-4 align-items-center justify-content-center justify-content-lg-between">
+        <div class="col-auto order-lg-1">
+          <div class="position-relative glow">
+            <img src="/images/graphics/g1.svg" alt="graphics x"
+              class="opacity-75 w-50 position-absolute start-100 top-0 translate-middle" />
+            <div class="glass rounded-4 p-5">
+              <img src="/images/icons/aidb-icon.png" alt="ai database" style="width: 10vmax; min-width: 150px" />
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-7 col-xl-6">
+          <h2 class="h1 fw-bold">
+            Grow Your Data Expertise
+          </h2>
+          <p class="fs-4">
+            Gain knowledge from expertly curated content, then apply those skills through projects that replicate
+            real-world scenarios.
+          </p>
+          <a href="/free-courses?type=course" class="btn btn-primary btn-gradient px-5">Get Started</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-img py-5" style="background-image: url('/images/bg/bg-home-2.png')">
+    <div class="container py-5">
+      <h2 class="h1 fw-bold position-relative text-center">
+        Don’t Get Left Behind—Start Your
+        <br class="d-none d-md-block" />
+        Data Journey
+        <span class="rounded-1 d-block position-absolute start-50 translate-middle-x mt-2" style="
+          height: 0.7rem;
+          width: 25vmax;
+          background: linear-gradient(-270deg, transparent 10%, var(--bs-info) 100%);
+        "></span>
+      </h2>
+      <div class="d-flex flex-wrap justify-content-center gap-3 gap-lg-5 mt-5 pt-5">
+        <div class="btn-gradient rounded-4 d-flex align-items-center px-3 py-2">
+          <img src="/images/icons/python-logo.png" alt="python logo" style="width: 6rem" />
+          <div class="h3 fw-bold pe-3">Learn Python <br />programming</div>
+        </div>
+        <div class="btn-gradient rounded-4 d-flex align-items-center px-3 py-2">
+          <img src="/images/icons/r-logo.png" alt="r logo" style="width: 6rem" />
+          <div class="h3 fw-bold pe-3">Learn R <br />programming</div>
+        </div>
+        <div class="btn-gradient rounded-4 d-flex align-items-center px-3 py-2">
+          <img src="/images/icons/sql-logo.png" alt="r logo" style="height: 4rem" />
+          <div class="h3 fw-bold px-3">Learn SQL <br />programming</div>
+        </div>
+      </div>
+    </div>
+  </section>
